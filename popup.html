@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xclip</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" class="brand-icon" aria-hidden="true">
+          <path
+            d="M12 17.59 6.7 12.3l1.42-1.42L11 13.76V4h2v9.76l2.88-2.88 1.42 1.42L12 17.59zM5 20v-2h14v2H5z"
+            fill="currentColor"
+          />
+        </svg>
+        <div>
+          <h1>xclip</h1>
+          <span class="version" id="version"></span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="history" role="tab">
+        Geçmiş
+      </button>
+      <button class="tab" data-tab="settings" role="tab">Ayarlar</button>
+      <button class="tab" data-tab="about" role="tab">Hakkında</button>
+    </nav>
+
+    <main class="content">
+      <!-- HISTORY -->
+      <section class="tab-panel active" data-panel="history">
+        <div class="panel-header">
+          <h2>Son İndirmeler</h2>
+          <button class="btn-text" id="clear-history">Temizle</button>
+        </div>
+        <div id="history-list" class="history-list">
+          <div class="empty-state" id="empty-history">
+            <div class="empty-icon">📥</div>
+            <p>Henüz indirme yok</p>
+            <small
+              >Twitter/X'te bir video gördüğünde, kalp/yorum butonlarının
+              yanındaki <strong>↓</strong> ikonuna tıkla.</small
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="tab-panel" data-panel="settings">
+        <div class="setting-row">
+          <label class="switch">
+            <input type="checkbox" id="setting-notifications" />
+            <span class="slider"></span>
+          </label>
+          <div class="setting-text">
+            <strong>Bildirimleri göster</strong>
+            <small>İndirme hatalarında masaüstü bildirimi göster</small>
+          </div>
+        </div>
+
+        <div class="setting-row column">
+          <label for="setting-template">
+            <strong>Dosya adı şablonu</strong>
+            <small>Kullanılabilir: {screenName}, {tweetText}, {tweetId}, {ext}<br>Tweet metni yoksa otomatik atlanır.</small>
+          </label>
+          <input
+            type="text"
+            id="setting-template"
+            class="input"
+            spellcheck="false"
+          />
+        </div>
+
+        <button id="save-settings" class="btn-primary">Kaydet</button>
+        <span id="save-feedback" class="save-feedback"></span>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="tab-panel" data-panel="about">
+        <div class="about">
+          <h3>Nasıl çalışır?</h3>
+          <ol>
+            <li>X (Twitter) sayfasını aç ve bir video içeren tweet'e gel.</li>
+            <li>
+              Kalp, yorum, retweet butonlarının yanına eklenen
+              <strong>↓ İndir</strong> butonuna tıkla.
+            </li>
+            <li>
+              Video doğrudan tarayıcının indirilenler klasörüne kaydedilir.
+            </li>
+          </ol>
+
+          <h3>Buton silikse?</h3>
+          <p>
+            Buton soluk görünüyorsa, video URL'si henüz API'den yakalanmadı
+            demektir. Sayfayı yenile veya tweet'i tek tek aç.
+          </p>
+
+          <h3>Privacy</h3>
+          <p>
+            Hiçbir harici sunucuya istek atılmıyor. Tüm işlemler tarayıcında
+            gerçekleşiyor; video URL'leri Twitter'ın kendi API yanıtlarından
+            okunuyor.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

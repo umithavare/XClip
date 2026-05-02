@@ -1,0 +1,118 @@
+/**
+* xclip - Button Styling
+ */
+
+/* Aksiyon barı içindeki wrapper — JS inline style ile X'in flex'ine uyduruyor.
+   Buradaki kurallar genel görsel sade kalsın diye hafif. */
+.xclip-download-btn-wrapper {
+  display: flex !important;
+  align-items: center;
+  min-width: 0;
+}
+
+/* İndir butonu (hem aksiyon barı hem overlay) */
+.xclip-download-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34.75px;
+  height: 34.75px;
+  padding: 0;
+  border-radius: 9999px;
+  color: rgb(113, 118, 123);
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.xclip-download-btn:hover {
+  background-color: rgba(29, 155, 240, 0.1);
+  color: rgb(29, 155, 240);
+}
+
+.xclip-download-btn:active {
+  transform: scale(0.92);
+}
+
+.xclip-download-btn svg {
+  width: 18.75px;
+  height: 18.75px;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* URL henüz yakalanmadıysa şeffaf */
+.xclip-download-btn:not(.xclip-ready) {
+  opacity: 0.55;
+}
+.xclip-download-btn.xclip-ready {
+  opacity: 1;
+}
+
+/* OVERLAY: video üzerine yapıştırılan buton */
+.xclip-overlay-wrapper {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 100;
+  pointer-events: none;
+}
+.xclip-overlay-btn {
+  pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  color: white !important;
+  width: 36px;
+  height: 36px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.xclip-overlay-btn:hover {
+  background-color: rgba(29, 155, 240, 0.85) !important;
+}
+.xclip-overlay-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Durum stilleri */
+.xclip-download-btn.xclip-loading {
+  color: rgb(29, 155, 240);
+}
+.xclip-download-btn.xclip-loading::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px solid rgba(29, 155, 240, 0.25);
+  border-top-color: rgb(29, 155, 240);
+  animation: xclip-spin 0.7s linear infinite;
+}
+.xclip-download-btn.xclip-loading svg {
+  visibility: hidden;
+}
+
+.xclip-download-btn.xclip-success {
+  color: rgb(0, 186, 124);
+  background-color: rgba(0, 186, 124, 0.12);
+}
+
+.xclip-download-btn.xclip-error {
+  color: rgb(244, 33, 46);
+  background-color: rgba(244, 33, 46, 0.12);
+  animation: xclip-shake 0.35s ease;
+}
+
+@keyframes xclip-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes xclip-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
